@@ -1,6 +1,8 @@
 import './App.css'
 import { useState, useEffect} from 'react';
 import {LandingPage} from "./components/LandingPage.tsx"
+import LoginPage from './components/LoginPage.tsx';
+import SignUpPage from './components/SignUpPage.tsx';
 
 function App() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -14,13 +16,9 @@ function App() {
 
 
   return <>
-    <LandingPage screenWidth={screenWidth}></LandingPage>
+    <SignUpPage></SignUpPage>
   </>
 }
-
-
-
-
 
 
 export default App

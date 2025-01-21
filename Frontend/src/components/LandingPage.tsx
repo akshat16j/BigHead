@@ -37,14 +37,14 @@ export function LandingPage({screenWidth}:{screenWidth:number}){
     </>
   }
   
-  function Header(){
+ export function Header(){
     return <div className='flex justify-between items-center h-[81px] tablet:h-[151px] laptop:h-[141px] desktop:h-[154px] box-border p-[24px] tablet:p-[42px] laptop:px-[112px] desktop:px-[140px]'>
-      <div className='flex'>
-        <img src="../Assets/icons8-brain-64.png" className='w-[32px] tablet:w-[64px] h-[32px] tablet:h-[64px] laptop:h-[72px] laptop:w-[72px] mr-[4px] tablet:mr-[13px]' alt="logo" />
+      <div className='flex cursor-pointer'>
+        <img src="../Assets/icons8-brain-64.png" className=' w-[32px] tablet:w-[64px] h-[32px] tablet:h-[64px] laptop:h-[72px] laptop:w-[72px] mr-[4px] tablet:mr-[13px]' alt="logo" />
         <div className='text-white font-inter text-[22px] tablet:text-[40px] laptop:text-[44px] font-semibold tracking-tightest'>BigHead</div>
       </div>
       <div className='flex items-center'>
-        <div className='text-[16px] tablet:text-[20px] mr-[12px] tablet:mr-[44px] text-white'>Register</div>
+        <div className='cursor-pointer text-[16px] tablet:text-[20px] mr-[12px] tablet:mr-[44px] text-white'>Register</div>
         <PrimaryButtonSmall text={"Login"}></PrimaryButtonSmall>
       </div>
     </div>
@@ -117,9 +117,9 @@ export function LandingPage({screenWidth}:{screenWidth:number}){
   function Follow(){
     return <div className='flex items-center w-[160px] justify-between '>
       <div className='text-[24px]  text-white'>Follow: </div>
-      <img className='w-[20px] h-[20px] invert' src="../Assets/github.png" alt="github" />
-      <img className='w-[20px] h-[20px] invert' src="../Assets/twitter.png" alt="twitter" />
-      <img className='w-[20px] h-[20px] invert' src="../Assets/instagram.png" alt="instagram" />
+      <img className='cursor-pointer w-[20px] h-[20px] invert' src="../Assets/github.png" alt="github" />
+      <img className='cursor-pointer w-[20px] h-[20px] invert' src="../Assets/twitter.png" alt="twitter" />
+      <img className='cursor-pointer w-[20px] h-[20px] invert' src="../Assets/instagram.png" alt="instagram" />
     </div>
   }
   
@@ -129,4 +129,4 @@ export function LandingPage({screenWidth}:{screenWidth:number}){
     </div>
   }
 
-  export default LandingPage
+  export default {LandingPage, Header}
