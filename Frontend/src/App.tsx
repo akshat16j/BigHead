@@ -3,6 +3,7 @@ import { useState, useEffect} from 'react';
 import {LandingPage} from "./components/LandingPage.tsx"
 import LoginPage from './components/LoginPage.tsx';
 import SignUpPage from './components/SignUpPage.tsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -16,7 +17,14 @@ function App() {
 
 
   return <>
-    <SignUpPage></SignUpPage>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LandingPage screenWidth={screenWidth}/>}></Route>
+        <Route path='/create-account' element={<SignUpPage/>}></Route>
+        <Route path='/login' element={<LoginPage/>}></Route>
+        <Route path='*' element={<div>Error:404 <br></br> Page Not Found</div>}></Route>
+      </Routes>
+    </BrowserRouter>
   </>
 }
 
