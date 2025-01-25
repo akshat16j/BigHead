@@ -78,7 +78,7 @@ export function LandingPage({screenWidth}:{screenWidth:number}){
   
   function Image(){
     return <div className='flex justify-center'>
-      <img className='border-[1px] border-solid border-white rounded-[15px] w-[303px] tablet:w-[637px] h-[168px] tablet:h-[353px] laptop:w-[1200px] laptop:h-[630px] desktop:w-[1610px] desktop:h-[910px] mt-[45px] tablet:mt-[89px]' src="../Assets/Screenshot 2025-01-15 030622.png" alt="image" />
+      <img className='border-[1px] border-solid border-white rounded-[15px] w-[303px] tablet:w-[637px] h-[168px] tablet:h-[353px] laptop:w-[1200px] laptop:h-[630px] desktop:w-[1610px] desktop:h-[910px] mt-[45px] tablet:mt-[89px]' src="../Assets/mainDesktop.png" alt="image" />
     </div>
   }
   

@@ -23,6 +23,7 @@ export default {
         'btn-color': '#4B7AFF',
         blue2: '#0E1420',
         blue3: '#080C13',
+        bgrey:"#2E2F45",
         grey: '#555555',
       },
       screens: {
