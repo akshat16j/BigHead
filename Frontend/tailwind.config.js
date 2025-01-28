@@ -5,6 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      mobile: '375px',
+      tablet: '768px',
+      mid: '1028px',
+      laptop: '1440px',
+      desktop: '1920px',
+    },
     extend: {
       fontFamily: {
         inter: ['Inter', 'sans-serif'], 
@@ -23,16 +30,8 @@ export default {
         'btn-color': '#4B7AFF',
         blue2: '#0E1420',
         blue3: '#080C13',
-        bgrey:"#2E2F45",
+        bgrey: "#2E2F45",
         grey: '#555555',
-      },
-      screens: {
-        mobile: '375px',
-        tablet: '768px',
-        landscape:"1028px",
-        laptop: '1440px',
-        desktop: '1920px',
-
       },
     },
   },
