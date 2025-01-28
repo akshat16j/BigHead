@@ -26,7 +26,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                             <img className="w-[20px] h-[20px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
                             <img className="w-[20px] h-[20px]" src="../../Assets/icons8-plus-50.png" alt="plus" />
                         </div>
-                        
+
                         <nav className="flex-1 overflow-y-auto w-full no-scrollbar">
                             <div className="flex flex-col items-center">
                                 <Link to="/"><div className="bg-blue2 flex w-[100px] rounded-[5px] h-[40px] justify-center hover:bg-bgrey mb-[20px] items-center"><img className="w-[28px] h-[32px] " src="../../Assets/icons8-youtube-50.png" alt="" /></div></Link>
@@ -39,14 +39,14 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                                 <Link to="/"><div className="bg-blue2 flex w-[100px] rounded-[5px] h-[40px] justify-center items-center hover:bg-bgrey mb-[20px]"><img className="w-[28px] h-[30px] " src="../../Assets/icons8-hashtag-50.png" alt="" /></div></Link>
                             </div>
                         </nav>
-                        
+
                         <div className="flex items-center justify-center w-[63px] mid:w-[100px] h-[42px] rounded-[5px] my-4 bg-bgrey">
                             <img className="invert w-[20px] h-[20px]" src="../../Assets/logout.svg" alt="logout" />
                         </div>
                     </div>
                 </div> :
                     <div>
-                        <div className="flex flex-col items-center fixed w-[30%] h-screen bg-blue3">
+                        <div className={`flex flex-col items-center fixed w-[30%] mid:w-[20%] h-screen bg-blue3 z-1000 `}>
                             <div className="flex justify-center items-center mt-[45px]">
                                 <img className="w-[25px] h-[25px] mr-4" src="../../Assets/icons8-menu-50.png" alt="menu" />
                                 <div className="flex items-center">
@@ -54,13 +54,13 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                                     <div className="text-[24px] tracking-tightest font-medium text-white">BigHead</div>
                                 </div>
                             </div>
-                            
+
                             <div className="mt-[40px] mb-[33px]">
                                 <MainPageButtons color="bgrey" icon="folder" text="New Folder"></MainPageButtons>
                             </div>
 
-                            <nav className="flex-1 overflow-y-auto w-full no-scrollbar">
-                                <div className="flex flex-col items-start px-4">
+                            <nav className="flex-1 overflow-y-auto w-full no-scrollbar flex items-center">
+                                <div className="flex flex-col items-start px-10 w-full">
                                     <Link to="/"><div className="bg-blue3 flex w-full px-[20px] rounded-[5px] h-[40px] justify-start items-center hover:bg-blue1 mb-[20px] text-white text-[16px]"><img className="w-[28px] h-[32px] mr-[15px] " src="../../Assets/icons8-youtube-50.png" alt="" />Videos</div></Link>
                                     <Link to="/"><div className="bg-blue3 flex w-full px-[20px] rounded-[5px] h-[40px] justify-start items-center hover:bg-blue1 mb-[20px] text-white text-[16px]"><img className="invert w-[28px] h-[28px] mr-[15px]" src="../../Assets/instagram.png" alt="" />Reels/Post</div></Link>
                                     <Link to="/"><div className="bg-blue3 flex w-full px-[20px] rounded-[5px] h-[40px] justify-start items-center hover:bg-blue1 mb-[20px] text-white text-[16px]"><img className="w-[28px] h-[30px] mr-[15px] " src="../../Assets/icons8-airpods-pro-max-50.png" alt="" />Music</div></Link>
@@ -80,13 +80,13 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                     </div>
                 }
 
-                <div className="ml-[15%] mid:ml-[10%] box-border relative h-screen overflow-y-auto">
+                <div className={`${!sidebar ? "ml-[15%] mid:ml-[10%]" : "ml-[30%] mid:ml-[20%]"} box-border relative h-screen overflow-y-auto`}>
                     <div className="sticky top-0 z-50 bg-blue2 pt-[35px] px-[24px] h-[90px]">
                         <HeaderMain screenWidth={screenWidth} sidebar={sidebar}></HeaderMain>
                     </div>
                     <div className="px-[24px]">
                         <div className="mt-[33px] text-[24px] text-white font-semibold mb-[25px]">All Notes</div>
-                        <div className="grid grid-cols-3 gap-5 tablet:grid-cols-3 mid:grid-cols-5 laptop:grid-cols-7 tablet:gap-5 mb-[25px] ">
+                        <div className={`grid grid-cols-3 gap-5 ${!sidebar ? "tablet:grid-cols-3 mid:grid-cols-5 laptop:grid-cols-7" : "tablet:grid-cols-2 tablet:gap-6 mid:grid-cols-4 laptop:grid-cols-5"} tablet:gap-5 mb-[25px]`}>
                             <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                             <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                             <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
@@ -95,7 +95,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                             <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                             <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                         </div>
-                        <div className="grid grid-cols-2 gap-5  tablet:grid-cols-2 mid:grid-cols-3 laptop:grid-cols-4 tablet:gap-8 ">
+                        <div className={`grid grid-cols-2 gap-5  ${!sidebar ? "tablet:grid-cols-2 mid:grid-cols-3 laptop:grid-cols-4" : " tablet:grid-cols-1 tablet:gap-6 mid:grid-cols-2 laptop:grid-cols-3"} tablet:gap-8 `}>
                             <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
                             <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
                             <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
@@ -153,14 +153,16 @@ function HeaderMain({ sidebar, screenWidth }: { sidebar: boolean, screenWidth: n
                 <MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons>
             </div>
         </div> : <div className="flex justify-end items-center sticky top-0 z-50 bg-blue2">
-            <div className="flex items-center w-[418px] justify-between">
-                <div className=" flex justify-center items-center box-border w-[230px] h-[45px] bg-bgrey rounded-[5px] ">
+            <div className="flex items-center justify-end flex-1 ml-8">
+                <div className="flex justify-center items-center box-border w-[230px] mr-[10px] ml-[10px] h-[45px] bg-bgrey rounded-[5px]">
                     <img className="w-[22px] h-[22px] opacity-30 mr-[10px] ml-[10px]" src="../../Assets/icons8-search-50.png" alt="search" />
-                    <input className="box-border w-[50px] h-[45px]  bg-transparent text-white" type="text" placeholder="Search" />
+                    <input className="box-border w-full h-[45px] bg-transparent text-white" type="text" placeholder="Search" />
                 </div>
-                <div className=" flex justify-center items-center box-border w-[63px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
-                    <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="logout" />
-                </div>
+                {screenWidth >= 1028 ? <div className="mr-[10px]"><MainPageButtons color="bgrey" icon="share" text="Share Head"></MainPageButtons></div> :
+                    <div className=" flex justify-center items-center w-[63px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
+                        <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
+                    </div>
+                }
                 <MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons>
             </div>
         </div>
