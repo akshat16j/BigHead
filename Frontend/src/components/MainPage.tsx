@@ -20,9 +20,9 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
 
             <div className="bg-blue2 min-h-screen w-full">
                 {!sidebar ? <div>
-                    <div className=" flex flex-col items-center fixed w-[15%] min-h-screen bg-blue2 ">
+                    <div className=" flex flex-col items-center fixed w-[15%] landscape:w-[10%] min-h-screen bg-blue2 ">
                         <img className="mt-[45px] w-[25px] h-[25px]" src="../../Assets/icons8-menu-50.png" alt="menu" />
-                        <div className="flex items-center justify-center mt-[40px] w-[63px] h-[42px] rounded-[5px] mb-[33px] bg-bgrey">
+                        <div className="flex items-center justify-center mt-[40px] w-[63px] landscape:w-[100px] h-[42px] rounded-[5px] mb-[33px] bg-bgrey">
                             <img className="w-[20px] h-[20px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
                             <img className="w-[20px] h-[20px]" src="../../Assets/icons8-plus-50.png" alt="plus" />
                         </div>
@@ -36,7 +36,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                             <Link to="/"><div className="bg-blue2 flex w-[100px] rounded-[5px] h-[40px] justify-center items-center hover:bg-bgrey mb-[20px]"><img className="w-[30px] h-[30px] " src="../../Assets/icons8-plus-50.png" alt="" /></div></Link>
                             <Link to="/"><div className="bg-blue2 flex w-[100px] rounded-[5px] h-[40px] justify-center items-center hover:bg-bgrey mb-[20px]"><img className="w-[28px] h-[30px] " src="../../Assets/icons8-hashtag-50.png" alt="" /></div></Link>
                         </nav>
-                        <div className="flex items-center justify-center mt-[40px] w-[63px] h-[42px] rounded-[5px] mb-[73px] bg-bgrey bottom-0 fixed">
+                        <div className="flex items-center justify-center mt-[40px] w-[63px] landscape:w-[100px] h-[42px] rounded-[5px] mb-[73px] bg-bgrey bottom-0 fixed">
                             <img className="invert w-[20px] h-[20px]" src="../../Assets/logout.svg" alt="logout" />
                         </div>
                     </div>
@@ -48,7 +48,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                                 <img className=" w-[25px] h-[25px] mr-4" src="../../Assets/icons8-menu-50.png" alt="menu" />
                                 <div className="flex items-center">
                                     <img className="w-[35px] h-[35px] mr-[7px]" src="../../Assets/icons8-brain-64.png" alt="logo" />
-                                    <div className="text-[24px] tracking-tightest font-medium text-white">BigHead</div>
+                                    <div className="text-[24px] tracking-tightest font-medium text-white">BigHead</div >
                                 </div>
                             </div>
                             <div className="mt-[40px] mb-[33px]">
@@ -73,26 +73,40 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                     </div>
                 }
 
-                <div className="ml-[15%] box-border px-[24px] pt-[35px]">
-                    <div className="sticky top-0">
-                        <HeaderMain sidebar={sidebar}></HeaderMain>
+                <div className="ml-[15%] landscape:ml-[10%] box-border px-[24px] pt-[35px]">
+                    <div className="flex items-center sticky z-10 top-0  h-[70px] bg-blue2">
+                        <HeaderMain screenWidth={screenWidth} sidebar={sidebar}></HeaderMain>
                     </div>
                     <div className="  mt-[33px] text-[24px] text-white font-semibold mb-[25px]">All Notes</div>
-                    <div className="grid grid-cols-3 gap-5 mb-[25px]">
+                    <div className="grid grid-cols-3 gap-5 mb-[25px] landscape:grid landscape:grid-cols-7 landscape:gap-2">
+                        <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
+                        <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
+                        <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                         <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                         <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                         <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                         <MainPageButtons color="bgrey" icon="folder" text="Folder1"></MainPageButtons>
                     </div>
-                    <div className="grid grid-cols-2 gap-5">
+                    <div className="grid grid-cols-2 gap-5 landscape:grid landscape:grid-cols-4 landscape:gap-6">
                         <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
                         <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
                         <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+                        <ContentCardMobile name="color grading tutorial"></ContentCardMobile>
+
                     </div>
 
                 </div>
             </div>
         }
+
 
     </div>
 }
@@ -115,21 +129,24 @@ function HeaderMobile() {
 }
 
 
-function HeaderMain({ sidebar }: { sidebar: boolean }) {
+function HeaderMain({ sidebar, screenWidth }: { sidebar: boolean, screenWidth: number }) {
     return <div >
         {!sidebar ? <div className="flex justify-between items-center">
             <div className="flex items-center">
                 <img className="w-[35px] h-[35px] mr-[7px]" src="../../Assets/icons8-brain-64.png" alt="logo" />
                 <div className="text-[24px] tracking-tightest font-medium text-white">BigHead</div>
             </div>
-            <div className="flex items-center w-[418px] justify-between">
+            <div className="flex items-center justify-between">
                 <div className=" flex justify-center items-center box-border w-[274px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
                     <img className="w-[22px] h-[22px] opacity-30 mr-[10px]" src="../../Assets/icons8-search-50.png" alt="search" />
                     <input className="box-border w-[50px] h-[45px]  bg-transparent" type="text" placeholder="Search" />
                 </div>
-                <div className=" flex justify-center items-center box-border w-[63px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
-                    <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="logout" />
-                </div>
+                {screenWidth >= 1028 ? <div className="mr-[10px]"><MainPageButtons color="bgrey" icon="share" text="Share Head"></MainPageButtons></div> :
+                    <div className=" flex justify-center items-center w-[63px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
+                        <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
+                    </div>
+                }
+
                 <MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons>
             </div>
         </div> : <div className="flex justify-end items-center">
