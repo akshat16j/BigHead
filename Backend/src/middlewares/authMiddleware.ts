@@ -16,7 +16,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
         res.status(401).json({ message: "Authorization header missing or invalid" });
         return
     }else{
-        const token = authHeader.split(" ")[1]
+        const token = authHeader
         if(!token){
             res.status(401).json({ message: "Token missing" });
             return

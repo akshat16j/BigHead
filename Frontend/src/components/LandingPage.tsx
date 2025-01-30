@@ -1,5 +1,6 @@
 import {PrimaryButtonSmall,PrimaryButtonLarge} from "../ui_components/ui.tsx"
 import { Link } from "react-router-dom"
+import { BASE_URL } from "../App.tsx"
 
 export function LandingPage({screenWidth}:{screenWidth:number}){
     return <>

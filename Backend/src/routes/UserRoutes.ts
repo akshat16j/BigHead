@@ -13,7 +13,7 @@ UserRouter.post('/register', async(req: Request, res: Response) => {
     try{
         const {success, data, error} = AuthSchema.safeParse(req.body)
         if(!success) {
-            res.status(400).json({errors:error.errors})
+            res.status(400).json({message:error.errors[0].message})
             return
         }else{
             const existingUser = await UserModel.findOne({username: data.username})
@@ -36,7 +36,7 @@ UserRouter.post('/login', async(req: Request, res: Response) => {
     try{
         const {success, data, error} = AuthSchema.safeParse(req.body)
         if(!success) {
-            res.status(400).json({errors:error.errors})
+            res.status(400).json({message:error.errors[0].message})
             return
         }else{
             const existingUser = await UserModel.findOne({username: data.username})

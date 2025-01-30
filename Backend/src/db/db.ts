@@ -38,13 +38,9 @@ const ContentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    user:{
+    userId:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
-        required: true
-    },
-    contentId:{
-        type: String,
         required: true
     },
     tags:{
