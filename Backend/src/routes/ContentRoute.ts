@@ -26,4 +26,13 @@ ContentRouter.post('/content', authMiddleware, async(req: Request, res: Response
     }
 })
 
+ContentRouter.get('/content', authMiddleware, async(req: Request, res: Response) => {
+    try{
+        const content = await ContentModel.find({userId: req.body.userId})
+        res.status(200).json({content})
+    }catch(err){
+        res.status(500).json({message: 'Internal server error'})
+    }
+})
+
 export default ContentRouter

@@ -1,9 +1,16 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { BASE_URL } from "../App"
 
 export function MainPage({ screenWidth }: { screenWidth: number }) {
     const [sidebar, setSideBar] = useState(false)
+    const res  = axios.get(`${BASE_URL}/content`,{
+        headers:{
+            authorization: `${sessionStorage.getItem('token')}`
+        }
+    })
     return <div >
+
         {screenWidth < 768 ? <div className='bg-blue2 min-h-screen'>
             <HeaderMobile></HeaderMobile>
             <ScrollTags></ScrollTags>

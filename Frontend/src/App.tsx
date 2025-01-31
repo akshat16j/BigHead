@@ -5,7 +5,7 @@ import LoginPage from './components/LoginPage.tsx';
 import SignUpPage from './components/SignUpPage.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainPage } from './components/MainPage.tsx';
-
+import { ProtectedRoutes } from './components/ProtectedRoute.tsx';
 export const BASE_URL = 'http://localhost:3000/api'
 
 function App() {
@@ -20,15 +20,15 @@ function App() {
 
 
   return <>
-    {/*<BrowserRouter>
-      <MainPage screenWidth={screenWidth}></MainPage>
-    </BrowserRouter> */}
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<LandingPage screenWidth={screenWidth} />}></Route>
         <Route path='/create-account' element={<SignUpPage />}></Route>
         <Route path='/login' element={<LoginPage />}></Route>
-        <Route path='*' element={<div>Error:404 <br></br> Page Not Found</div>}></Route>
+        <Route path='*' element={<div>Error:404 <br></br>Page Not Found</div>}></Route>
+        <Route element={<ProtectedRoutes/>}>
+          <Route path='/dashboard' element={<MainPage screenWidth={screenWidth} />}></Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   </>
