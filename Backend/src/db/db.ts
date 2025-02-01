@@ -47,9 +47,14 @@ const ContentSchema = new mongoose.Schema({
         type: [String],
         default: []
     },
+    folder:{
+        type: String,
+        default: ''
+    }
 })
 
 const UserModel = mongoose.model('BigHeadUsers', UserSchema)
 const ContentModel = mongoose.model('Content', ContentSchema)
 
 export {UserModel, ContentModel}
+
