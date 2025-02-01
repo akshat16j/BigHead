@@ -97,11 +97,12 @@ export function FolderButtons({ color, icon, text, setFolder }: { color: string,
     <div className="text-[16px] text-white">{text}</div>
   </div>
 }
-export function ScrollTags() {
+export function ScrollTags({setFolderDialogBox}:{setFolderDialogBox: (value: boolean) => void}) {
   return <div className="mt-[60px] z-20 bg-blue3 h-[45px] fixed flex box-border left-0 right-0 pl-[16px] py-[7px] overflow-x-auto no-scrollbar">
     <div className="bg-btn-color rounded-[5px] px-[11px] py-[7px] text-[12px] flex mr-[6px] box-border">
-      <div className="flex w-[35px] items-center">
+      <div onClick={() => setFolderDialogBox(true)} className="flex w-[35px] items-center">
         <img className="w-[20px] h-[20px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="new folder" />
+
         <img className="w-[15px] h-[15px]" src="../../Assets/icons8-plus-50.png" />
       </div>
     </div>

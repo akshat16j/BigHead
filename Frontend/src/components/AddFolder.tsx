@@ -7,7 +7,7 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try{
-            await axios.post(`${BASE_URL}/add-folder`,{folderName})
+            await axios.post(`${BASE_URL}/add-folder`,folderName)
             clearFolderName()
         }catch(error){
             alert(error)

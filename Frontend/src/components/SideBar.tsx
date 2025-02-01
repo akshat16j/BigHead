@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom"
-import { HeaderMobile, HeaderMain, MainPageButtons, FolderButtons, ScrollTags, Tag, Folders, FolderCardMobile, ContentCardMobile, TagOnCard } from "../ui_components/ui"
+import {MainPageButtons} from "../ui_components/ui"
 
 interface SideBarProps {
     sidebar: boolean;
     toggleSidebar: () => void;
     logoClickHandler: () => void;
-    createFolder: () => void;
+    setFolderDialogBox: (value: boolean) => void;
 }
 
-export function SideBar({ sidebar, toggleSidebar, logoClickHandler,createFolder }: SideBarProps) {
+
+
+export function SideBar({ sidebar, toggleSidebar, logoClickHandler,setFolderDialogBox }: SideBarProps) {
     return <>
         {!sidebar ? <div>
             <div className="flex flex-col items-center fixed w-[15%] mid:w-[10%] h-screen bg-blue2">
+
                 <img onClick={toggleSidebar} className="cursor-pointer mt-[45px] w-[25px] h-[25px]" src="../../Assets/icons8-menu-50.png" alt="menu" />
-                <div onClick={createFolder} className="cursor-pointer flex items-center justify-center mt-[40px] w-[63px] mid:w-[100px] h-[42px] rounded-[5px] mb-[33px] ml bg-bgrey">
+                <div onClick={() => setFolderDialogBox(true)} className="cursor-pointer flex items-center justify-center mt-[40px] w-[63px] mid:w-[100px] h-[42px] rounded-[5px] mb-[33px] ml bg-bgrey">
                     <img className="w-[20px] h-[20px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
                     <img className="w-[20px] h-[20px]" src="../../Assets/icons8-plus-50.png" alt="plus" />
                 </div>
@@ -45,9 +48,10 @@ export function SideBar({ sidebar, toggleSidebar, logoClickHandler,createFolder 
                             </div>
                         </Link>
                     </div>
-                    <div onClick={createFolder} className="mt-[40px] mb-[33px]">
+                    <div onClick={() => setFolderDialogBox(true)} className="mt-[40px] mb-[33px]">
                         <MainPageButtons color="bgrey" icon="folder" text="New Folder"></MainPageButtons>
                     </div>
+
 
                     <nav className="flex-1 overflow-y-auto w-full no-scrollbar flex items-center">
                         <div className="flex flex-col items-start px-10 w-full">
