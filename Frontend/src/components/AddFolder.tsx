@@ -9,6 +9,7 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
         try{
             await axios.post(`${BASE_URL}/add-folder`,folderName)
             clearFolderName()
+            setFolderDialogBox(!folderDialogBox)
         }catch(error){
             alert(error)
         }

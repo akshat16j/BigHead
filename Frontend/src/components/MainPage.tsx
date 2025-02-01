@@ -55,9 +55,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
             setFolders(resFolders.data.folders)
         }
         fetchContent()
-
-
-    }, [])
+    },[])
 
     function toggleSidebar() {
         setSideBar(!sidebar)
@@ -72,31 +70,25 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
 
 
         {screenWidth < 768 ? <div className='bg-blue2 min-h-screen'>
-            <HeaderMobile contentDialogBox={contentDialogBox} setContentDialogBox={setContentDialogBox}></HeaderMobile>
+            <HeaderMobile contentDialogBox={contentDialogBox} setContentDialogBox={setContentDialogBox} logoClickHandler={logoClickHandler}></HeaderMobile>
             <ScrollTags setFolderDialogBox={setFolderDialogBox}></ScrollTags>
             <div className="box-border px-[16px]">
 
 
 
                 <div className="pt-[126px] relative mt-[10px] text-[20px] text-white font-semibold mb-[10px]">{folder ? folder : "All Notes"}</div>
-                <Folders folders={folders}></Folders>
+                <Folders folders={folders} setFolder={setFolder}></Folders>
                 <div className="flex flex-col items-center">
                     {contents.map((content) => (
                         <ContentCardMobile key={content._id} name={content.title} tags={content.tags || []} type={content.contentType} description={content.description || ""} folder={content.folder || ""} ></ContentCardMobile>
                     ))}
                 </div>
-
-
             </div></div>
 
             :
 
             <div className="bg-blue2 min-h-screen w-full overflow-y-auto">
                 <SideBar sidebar={sidebar} toggleSidebar={toggleSidebar} logoClickHandler={logoClickHandler} setFolderDialogBox={setFolderDialogBox}></SideBar>
-
-
-
-
                 <div className={`${!sidebar ? "ml-[15%] mid:ml-[10%]" : "ml-[30%] mid:ml-[20%]"} box-border relative h-screen overflow-y-auto`}>
                     <div className="sticky top-0 z-50 bg-blue2 pt-[35px] px-[24px] h-[90px]">
                         <HeaderMain screenWidth={screenWidth} sidebar={sidebar} logoClickHandler={logoClickHandler} setContentDialogBox={setContentDialogBox} contentDialogBox={contentDialogBox}></HeaderMain>

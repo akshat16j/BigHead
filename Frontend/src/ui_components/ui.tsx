@@ -13,11 +13,13 @@ export function PrimaryButtonLarge({ text }: { text: string }) {
     <button className={`bg-btn-color text-[18px] tablet:text-[24px]  text-white rounded-full px-6 tablet:py-[18px] py-2 tablet:w-[220px] `}>{text}</button>
   </div>
 }
-export function HeaderMobile({setContentDialogBox,contentDialogBox}:{setContentDialogBox: (value: boolean) => void,contentDialogBox:boolean}) {
+export function HeaderMobile({setContentDialogBox,contentDialogBox,logoClickHandler}:{setContentDialogBox: (value: boolean) => void,contentDialogBox:boolean,logoClickHandler:()=>void}) {
   return <div className='flex z-10 top-0 bg-blue3 justify-between fixed w-full items-center h-[70px] tablet:h-[151px] laptop:h-[141px] desktop:h-[154px] box-border p-[24px] tablet:p-[42px] laptop:px-[112px] desktop:px-[140px]'>
-    <Link to="/" className='flex cursor-pointer'>
+    <Link to="/dashboard">
+    <div onClick={logoClickHandler} className="cursor-pointer flex items-center">
       <img src="../Assets/icons8-brain-64.png" className=' w-[32px] tablet:w-[64px] h-[32px] tablet:h-[64px] laptop:h-[72px] laptop:w-[72px] mr-[4px] tablet:mr-[13px]' alt="logo" />
       <div className='text-white font-inter text-[22px] tablet:text-[40px] laptop:text-[44px] font-semibold tracking-tightest'>BigHead</div>
+    </div>
     </Link>
     <div className="flex justify-between w-[157px] items-center">
       <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
@@ -123,17 +125,20 @@ export function Tag({ tag }: { tag: string }) {
   </div>
 }
 
-export function Folders({ folders }: { folders: string[] }) {
+export function Folders({ folders,setFolder }: { folders: string[],setFolder:Function }) {
+  
   return <div className="grid grid-cols-3 gap-4 mb-[30px]">
     {folders.map((folder) => (
-      <FolderCardMobile key={folder} name={folder}></FolderCardMobile>
+      <FolderCardMobile key={folder} name={folder} setFolder={setFolder}></FolderCardMobile>
     ))}
   </div>
 }
 
 
-export function FolderCardMobile({ name }: { name: string }) {
-  return <div className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
+
+
+export function FolderCardMobile({ name,setFolder }: { name: string,setFolder:Function }) {
+  return <div onClick={() => setFolder(name)} className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
     <img className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
     <div className="text-[10px] text-white">{name}</div>
   </div>
@@ -143,6 +148,7 @@ export function ContentCardMobile({ name, tags, type, description,folder }: { na
   let icon = ""
   if (type == "youtube") {
     icon = "icons8-youtube-50.png"
+
   } else if (type == "instagram") {
     icon = "instagram.png"
   } else if (type == "music") {

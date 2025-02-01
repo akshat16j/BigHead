@@ -9,6 +9,7 @@ export function AddContent({ setContentDialogBox, contentDialogBox,folder }: { s
         try{
             await axios.post(`${BASE_URL}/add-content`,contentData)
             clearContentData()
+            setContentDialogBox(!contentDialogBox)
         }catch(error){
             alert(error)
         }
