@@ -12,7 +12,6 @@ export function ProtectedRoutes(){
     }else{
         return <Outlet />
     }
-
 }
 
 export default ProtectedRoutes

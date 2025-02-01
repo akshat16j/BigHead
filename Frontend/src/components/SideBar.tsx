@@ -5,14 +5,15 @@ interface SideBarProps {
     sidebar: boolean;
     toggleSidebar: () => void;
     logoClickHandler: () => void;
+    createFolder: () => void;
 }
 
-export function SideBar({ sidebar, toggleSidebar, logoClickHandler }: SideBarProps) {
+export function SideBar({ sidebar, toggleSidebar, logoClickHandler,createFolder }: SideBarProps) {
     return <>
         {!sidebar ? <div>
             <div className="flex flex-col items-center fixed w-[15%] mid:w-[10%] h-screen bg-blue2">
                 <img onClick={toggleSidebar} className="cursor-pointer mt-[45px] w-[25px] h-[25px]" src="../../Assets/icons8-menu-50.png" alt="menu" />
-                <div className="flex items-center justify-center mt-[40px] w-[63px] mid:w-[100px] h-[42px] rounded-[5px] mb-[33px] ml bg-bgrey">
+                <div onClick={createFolder} className="cursor-pointer flex items-center justify-center mt-[40px] w-[63px] mid:w-[100px] h-[42px] rounded-[5px] mb-[33px] ml bg-bgrey">
                     <img className="w-[20px] h-[20px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
                     <img className="w-[20px] h-[20px]" src="../../Assets/icons8-plus-50.png" alt="plus" />
                 </div>
@@ -34,7 +35,7 @@ export function SideBar({ sidebar, toggleSidebar, logoClickHandler }: SideBarPro
             </div>
         </div> :
             <div>
-                <div className={`flex flex-col items-center fixed w-[30%] mid:w-[20%] h-screen bg-blue3 z-1000 `}>
+                <div className={`flex flex-col items-center fixed w-[30%] mid:w-[20%] h-screen bg-blue3 z-40 `}>
                     <div className="flex justify-center items-center mt-[45px]">
                         <img onClick={toggleSidebar} className="cursor-pointer w-[25px] h-[25px] mr-4" src="../../Assets/icons8-menu-50.png" alt="menu" />
                         <Link to={"/dashboard"}>
@@ -44,7 +45,7 @@ export function SideBar({ sidebar, toggleSidebar, logoClickHandler }: SideBarPro
                             </div>
                         </Link>
                     </div>
-                    <div className="mt-[40px] mb-[33px]">
+                    <div onClick={createFolder} className="mt-[40px] mb-[33px]">
                         <MainPageButtons color="bgrey" icon="folder" text="New Folder"></MainPageButtons>
                     </div>
 

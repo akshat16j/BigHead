@@ -13,7 +13,7 @@ export function PrimaryButtonLarge({ text }: { text: string }) {
     <button className={`bg-btn-color text-[18px] tablet:text-[24px]  text-white rounded-full px-6 tablet:py-[18px] py-2 tablet:w-[220px] `}>{text}</button>
   </div>
 }
-export function HeaderMobile() {
+export function HeaderMobile({setContentDialogBox,contentDialogBox}:{setContentDialogBox: (value: boolean) => void,contentDialogBox:boolean}) {
   return <div className='flex z-10 top-0 bg-blue3 justify-between fixed w-full items-center h-[70px] tablet:h-[151px] laptop:h-[141px] desktop:h-[154px] box-border p-[24px] tablet:p-[42px] laptop:px-[112px] desktop:px-[140px]'>
     <Link to="/" className='flex cursor-pointer'>
       <img src="../Assets/icons8-brain-64.png" className=' w-[32px] tablet:w-[64px] h-[32px] tablet:h-[64px] laptop:h-[72px] laptop:w-[72px] mr-[4px] tablet:mr-[13px]' alt="logo" />
@@ -22,15 +22,17 @@ export function HeaderMobile() {
     <div className="flex justify-between w-[157px] items-center">
       <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
       <img className="w-[23px] h-[23px]" src="../../Assets/icons8-search-50.png" alt="search" />
-      <img className="w-[30px] h-[30px]" src="../../Assets/icons8-plus-50.png" alt="add" />
+      <img onClick={() => setContentDialogBox(!contentDialogBox)} className="w-[30px] h-[30px]" src="../../Assets/icons8-plus-50.png" alt="add" />
       <img className="invert w-[23px] h-[23px]" src="../../Assets/logout.svg" alt="logout" />
+
     </div>
+
   </div>
 }
 
 
-export function HeaderMain({ sidebar, screenWidth, logoClickHandler }: { sidebar: boolean, screenWidth: number, logoClickHandler: () => void }) {
-  return <div className="w-full sticky top-0 z-50 bg-blue2">
+export function HeaderMain({ sidebar, screenWidth, logoClickHandler, setContentDialogBox,contentDialogBox }: { sidebar: boolean, screenWidth: number, logoClickHandler: () => void, setContentDialogBox: (value: boolean) => void,contentDialogBox:boolean }) {
+  return <div className="w-full sticky top-0 z-20 bg-blue2">
     {!sidebar ? <div className="flex justify-between items-center w-full ">
       <Link to={"/dashboard"}>
         <div onClick={logoClickHandler} className="cursor-pointer flex items-center">
@@ -50,10 +52,12 @@ export function HeaderMain({ sidebar, screenWidth, logoClickHandler }: { sidebar
             <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
           </div>
         }
-        <MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons>
+        <div onClick={() => setContentDialogBox(!contentDialogBox)}><MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons></div>
       </div>
-    </div> : <div className="flex justify-end items-center sticky top-0 z-50 bg-blue2">
+    </div> : <div className="flex justify-end items-center sticky top-0 z-20 bg-blue2">
       <div className="flex items-center justify-end flex-1 ml-8">
+
+
         <div className="flex justify-center items-center box-border w-[230px] mr-[10px] ml-[10px] h-[45px] bg-bgrey rounded-[5px]">
           <img className="w-[22px] h-[22px] opacity-30 mr-[10px] ml-[10px]" src="../../Assets/icons8-search-50.png" alt="search" />
           <input className="box-border w-full h-[45px] bg-transparent text-white" type="text" placeholder="Search" />
@@ -63,9 +67,11 @@ export function HeaderMain({ sidebar, screenWidth, logoClickHandler }: { sidebar
             <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
           </div>
         }
-        <MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons>
+        <div onClick={() => setContentDialogBox(!contentDialogBox)}><MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons></div>
       </div>
     </div>
+
+
 
     }
 
