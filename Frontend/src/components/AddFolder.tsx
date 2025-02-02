@@ -7,9 +7,12 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try{
-            const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`)
+            const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`,{},{
+                headers: {
+                    authorization: `${sessionStorage.getItem('token')}`
+                }
+            });
             if(res.status == 200){
-                alert("Folder added successfully")
                 clearFolderName()
                 setFolderDialogBox(!folderDialogBox)
             }

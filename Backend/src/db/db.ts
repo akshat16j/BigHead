@@ -62,8 +62,14 @@ const FolderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Users',
         required: true
+    },
+    parentFolder:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Folder',
+        default: null
     }
 })
+
 
 
 

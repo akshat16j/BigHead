@@ -41,6 +41,8 @@ ContentRouter.post('/add-folder', authMiddleware, async(req: Request, res: Respo
         const {folder} = req.query
         const folders = await FolderModel.create({name: folder, userId: req.body.userId})
         res.status(200).json({message: 'Folder added successfully', folders})
+        console.log(folders)
+
     }catch(err){
         res.status(500).json({message: 'Internal server error'})
     }

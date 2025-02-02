@@ -119,9 +119,10 @@ export function FolderButtons({ color, icon, text, setFolder, deleteFolderHandle
   }, []);
 
   function folderChangeHandler() {
-    setFolder(text)
+    setFolder(id)
   }
   return <div className={`cursor-pointer flex items-center justify-center rounded-[5px] w-[170px] h-[45px] text-ellipsis overflow-hidden box-border px-[8px] bg-${color}`}>
+
 
     {icon == "share" ? <img className="invert h-[22px] w-[22px] mr-[9px]" src="../../Assets/share.svg" /> :
 
@@ -204,8 +205,8 @@ export function FolderCardMobile({ name, setFolder, deleteFolderHandler, id }: {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
   return <div  className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
-    <img onClick={() => setFolder(name)} className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
-    <div onClick={() => setFolder(name)} className="text-[10px] text-white">{name}</div>
+    <img onClick={() => setFolder(id)} className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
+    <div onClick={() => setFolder(id)} className="text-[10px] text-white">{name}</div>
     <button
 
       onClick={() => setShowMenu((prev) => !prev)}
