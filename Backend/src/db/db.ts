@@ -53,8 +53,23 @@ const ContentSchema = new mongoose.Schema({
     }
 })
 
+const FolderSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Users',
+        required: true
+    }
+})
+
+
+
 const UserModel = mongoose.model('BigHeadUsers', UserSchema)
 const ContentModel = mongoose.model('Content', ContentSchema)
+const FolderModel = mongoose.model('Folder', FolderSchema)
+export {UserModel, ContentModel, FolderModel}
 
-export {UserModel, ContentModel}
 

@@ -1,5 +1,19 @@
-import React from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import { MoreVertical } from "lucide-react";
+import { BASE_URL } from "../App";
+
+
+interface Folder {
+  _id: string;
+  name: string;
+  userId: string;
+}
+
+
+
+
+
 
 
 export function PrimaryButtonSmall({ text }: { text: string }) {
@@ -13,13 +27,13 @@ export function PrimaryButtonLarge({ text }: { text: string }) {
     <button className={`bg-btn-color text-[18px] tablet:text-[24px]  text-white rounded-full px-6 tablet:py-[18px] py-2 tablet:w-[220px] `}>{text}</button>
   </div>
 }
-export function HeaderMobile({setContentDialogBox,contentDialogBox,logoClickHandler}:{setContentDialogBox: (value: boolean) => void,contentDialogBox:boolean,logoClickHandler:()=>void}) {
+export function HeaderMobile({ setContentDialogBox, contentDialogBox, logoClickHandler }: { setContentDialogBox: (value: boolean) => void, contentDialogBox: boolean, logoClickHandler: () => void }) {
   return <div className='flex z-10 top-0 bg-blue3 justify-between fixed w-full items-center h-[70px] tablet:h-[151px] laptop:h-[141px] desktop:h-[154px] box-border p-[24px] tablet:p-[42px] laptop:px-[112px] desktop:px-[140px]'>
     <Link to="/dashboard">
-    <div onClick={logoClickHandler} className="cursor-pointer flex items-center">
-      <img src="../Assets/icons8-brain-64.png" className=' w-[32px] tablet:w-[64px] h-[32px] tablet:h-[64px] laptop:h-[72px] laptop:w-[72px] mr-[4px] tablet:mr-[13px]' alt="logo" />
-      <div className='text-white font-inter text-[22px] tablet:text-[40px] laptop:text-[44px] font-semibold tracking-tightest'>BigHead</div>
-    </div>
+      <div onClick={logoClickHandler} className="cursor-pointer flex items-center">
+        <img src="../Assets/icons8-brain-64.png" className=' w-[32px] tablet:w-[64px] h-[32px] tablet:h-[64px] laptop:h-[72px] laptop:w-[72px] mr-[4px] tablet:mr-[13px]' alt="logo" />
+        <div className='text-white font-inter text-[22px] tablet:text-[40px] laptop:text-[44px] font-semibold tracking-tightest'>BigHead</div>
+      </div>
     </Link>
     <div className="flex justify-between w-[157px] items-center">
       <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
@@ -33,7 +47,7 @@ export function HeaderMobile({setContentDialogBox,contentDialogBox,logoClickHand
 }
 
 
-export function HeaderMain({ sidebar, screenWidth, logoClickHandler, setContentDialogBox,contentDialogBox }: { sidebar: boolean, screenWidth: number, logoClickHandler: () => void, setContentDialogBox: (value: boolean) => void,contentDialogBox:boolean }) {
+export function HeaderMain({ sidebar, screenWidth, logoClickHandler, setContentDialogBox, contentDialogBox }: { sidebar: boolean, screenWidth: number, logoClickHandler: () => void, setContentDialogBox: (value: boolean) => void, contentDialogBox: boolean }) {
   return <div className="w-full sticky top-0 z-20 bg-blue2">
     {!sidebar ? <div className="flex justify-between items-center w-full ">
       <Link to={"/dashboard"}>
@@ -88,18 +102,53 @@ export function MainPageButtons({ color, icon, text }: { color: string, icon: st
     <div className="text-[16px] text-white">{text}</div>
   </div>
 }
-export function FolderButtons({ color, icon, text, setFolder }: { color: string, icon: string, text: string, setFolder: Function }) {
+export function FolderButtons({ color, icon, text, setFolder, deleteFolderHandler, id }: { color: string, icon: string, text: string, setFolder: Function, deleteFolderHandler: Function, id: string }) {
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !(menuRef.current as HTMLElement).contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   function folderChangeHandler() {
     setFolder(text)
   }
-  return <div onClick={folderChangeHandler} className={`cursor-pointer flex items-center justify-center rounded-[5px] w-[170px] h-[45px] text-ellipsis overflow-hidden box-border px-[8px] bg-${color}`}>
+  return <div className={`cursor-pointer flex items-center justify-center rounded-[5px] w-[170px] h-[45px] text-ellipsis overflow-hidden box-border px-[8px] bg-${color}`}>
+
     {icon == "share" ? <img className="invert h-[22px] w-[22px] mr-[9px]" src="../../Assets/share.svg" /> :
 
-      <img className={`h-[20px] w-[20px] mr-[9px]`} src={`../../Assets/icons8-${icon}-50.png`} />}
-    <div className="text-[16px] text-white">{text}</div>
+      <img onClick={folderChangeHandler} className={`h-[20px] w-[20px] mr-[9px]`} src={`../../Assets/icons8-${icon}-50.png`} />}
+    <div onClick={folderChangeHandler} className="text-[16px] text-white">{text}</div>
+    <button
+      onClick={() => setShowMenu((prev) => !prev)}
+
+
+      className="ml-[8px] text-white p-1 rounded-full hover:bg-grey"
+    >
+      <MoreVertical size={20} />
+    </button>
+   
+    {showMenu && (
+        <div
+          ref={menuRef}
+          className="absolute mt-2 translate-y-[40px] bg-blue1 shadow-lg rounded-lg min-w-[150px] z-10"
+        >
+          <ul className="py-2">
+            <li onClick={() => deleteFolderHandler(id)} className="px-3 hover:bg-bgrey cursor-pointer text-red-500">Delete</li>
+          </ul>
+        </div>
+    )}
   </div>
 }
-export function ScrollTags({setFolderDialogBox}:{setFolderDialogBox: (value: boolean) => void}) {
+export function ScrollTags({ setFolderDialogBox }: { setFolderDialogBox: (value: boolean) => void }) {
   return <div className="mt-[60px] z-20 bg-blue3 h-[45px] fixed flex box-border left-0 right-0 pl-[16px] py-[7px] overflow-x-auto no-scrollbar">
     <div className="bg-btn-color rounded-[5px] px-[11px] py-[7px] text-[12px] flex mr-[6px] box-border">
       <div onClick={() => setFolderDialogBox(true)} className="flex w-[35px] items-center">
@@ -125,29 +174,68 @@ export function Tag({ tag }: { tag: string }) {
   </div>
 }
 
-export function Folders({ folders,setFolder }: { folders: string[],setFolder:Function }) {
-  
+export function Folders({ folders, setFolder, deleteFolderHandler }: { folders: Folder[], setFolder: Function, deleteFolderHandler: Function }) {
+
+
   return <div className="grid grid-cols-3 gap-4 mb-[30px]">
     {folders.map((folder) => (
-      <FolderCardMobile key={folder} name={folder} setFolder={setFolder}></FolderCardMobile>
+      <FolderCardMobile id={folder._id} key={folder._id} name={folder.name} setFolder={setFolder} deleteFolderHandler={deleteFolderHandler}></FolderCardMobile>
     ))}
   </div>
+
 }
 
 
 
 
-export function FolderCardMobile({ name,setFolder }: { name: string,setFolder:Function }) {
-  return <div onClick={() => setFolder(name)} className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
-    <img className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
-    <div className="text-[10px] text-white">{name}</div>
+export function FolderCardMobile({ name, setFolder, deleteFolderHandler, id }: { name: string, setFolder: Function, deleteFolderHandler: Function, id: string }) {
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !(menuRef.current as HTMLElement).contains(event.target as Node)) {
+        setShowMenu(false);
+      }
+
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+  return <div  className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
+    <img onClick={() => setFolder(name)} className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
+    <div onClick={() => setFolder(name)} className="text-[10px] text-white">{name}</div>
+    <button
+
+      onClick={() => setShowMenu((prev) => !prev)}
+
+
+      className="ml-[2px] text-white p-1 rounded-full hover:bg-grey"
+    >
+      <MoreVertical size={20} />
+    </button>
+   
+    {showMenu && (
+        <div
+          ref={menuRef}
+          className="absolute mt-2 translate-y-[70px] bg-blue1 shadow-lg rounded-lg min-w-[150px] z-10"
+        >
+          <ul className="py-2">
+            <li onClick={() => deleteFolderHandler(name)} className="px-4 py-2 hover:bg-bgrey cursor-pointer text-red-500">Delete</li>
+          </ul>
+        </div>
+
+
+    )}
   </div>
 }
 
-export function ContentCardMobile({ name, tags, type, description,folder }: { name: string, tags: string[], type: string, description: string,folder:string }) {
+export function ContentCardMobile({ name, tags, type, description, folder, deleteContentHandler, id }: { name: string, tags: string[], type: string, description: string, folder: string, deleteContentHandler: Function, id: string }) {
   let icon = ""
   if (type == "youtube") {
     icon = "icons8-youtube-50.png"
+
 
   } else if (type == "instagram") {
     icon = "instagram.png"
@@ -172,9 +260,12 @@ export function ContentCardMobile({ name, tags, type, description,folder }: { na
       <div className="flex items-center">
 
         <img className="invert w-[15px] h-[15px] mr-[16px]" src="../../Assets/share.svg" />
-        <img className="w-[15px] h-[15px]" src="../../Assets/icons8-delete-50.png" />
+        <img onClick={() => deleteContentHandler(id)} className="w-[15px] h-[15px]" src="../../Assets/icons8-delete-50.png" />
       </div>
     </div>
+
+
+
     <div className="bg-blue1 text-gray-100 text-[12px] w-[260px] h-[147px] rounded-[5px] mb-[11px] box-border px-4 py-2 overflow-hidden text-ellipsis">
       {type == "text" ? description : ""}
       {type == "youtube" ? <img src={`../../Assets/screenshot.png`} alt="youtube" /> : ""}

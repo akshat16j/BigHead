@@ -7,9 +7,12 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try{
-            await axios.post(`${BASE_URL}/add-folder`,folderName)
-            clearFolderName()
-            setFolderDialogBox(!folderDialogBox)
+            const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`)
+            if(res.status == 200){
+                alert("Folder added successfully")
+                clearFolderName()
+                setFolderDialogBox(!folderDialogBox)
+            }
         }catch(error){
             alert(error)
         }
@@ -20,7 +23,6 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
     }
     return <>
         <div>
-
             <form onSubmit={handleSubmit} className="relative z-20">
                 <div className="flex flex-col w-[308px] tablet:w-[413px] h-[270px] tablet:h-[350px] bg-blue3 rounded-[10px] p-[20px] tablet:px-[40px] tablet:py-[50px] border-white border-[1px] ">
                     <h1 className="text-center text-[20px] tablet:text-[32px] font-bold text-white mb-[20px]">Add Folder</h1>
@@ -35,5 +37,4 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
         </div>
     </>
 }
-
 export default AddFolder;

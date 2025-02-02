@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { BASE_URL } from "../App"
 import axios from "axios"
 import { SideBar } from "./SideBar"
-import { HeaderMobile, FolderButtons, HeaderMain, ScrollTags, Tag, Folders, FolderCardMobile, ContentCardMobile, TagOnCard } from "../ui_components/ui"
+import { HeaderMobile, FolderButtons, HeaderMain, ScrollTags, Folders, ContentCardMobile } from "../ui_components/ui"
 import { AddContent } from "./AddContent"
 import { AddFolder } from "./AddFolder"
+
+
 
 
 interface Content {
@@ -25,17 +27,25 @@ interface ContentResponse {
     content: Content[];
 }
 
-interface FolderResponse {
-    folders: string[];
+interface Folder {
+    _id: string;
+    name: string;
+    userId: string;
 }
+
+interface FolderResponse {
+    folders: Folder[];
+}
+
 
 export function MainPage({ screenWidth }: { screenWidth: number }) {
     const [sidebar, setSideBar] = useState(false)
 
     const [contents, setContents] = useState<Content[]>([])
-    const [folders, setFolders] = useState<string[]>(["Folder1", "Folder2", "Folder3", "Folder4", "Folder5", "Folder6", "Folder7", "Folder8", "Folder9", "Folder10"])
+    const [folders, setFolders] = useState<Folder[]>([])
     const [folder, setFolder] = useState<string>("")
     const [contentDialogBox, setContentDialogBox] = useState<boolean>(false)
+
     const [folderDialogBox, setFolderDialogBox] = useState<boolean>(false)
 
     useEffect(() => {
@@ -46,7 +56,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                 }
             })
             setFolders(resFolders.data.folders)
-            const resContent = await axios.get<ContentResponse>(`${BASE_URL}/content`, {
+            const resContent = await axios.get<ContentResponse>(`${BASE_URL}/content?folder=${folder}`, {
                 headers: {
                     authorization: `${sessionStorage.getItem('token')}`
                 }
@@ -55,7 +65,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
             setFolders(resFolders.data.folders)
         }
         fetchContent()
-    },[])
+    }, [folders, contents, folder])
 
     function toggleSidebar() {
         setSideBar(!sidebar)
@@ -64,10 +74,24 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
         setFolder("")
         return <Link to={"/dashboard"}></Link>
     }
-    
+    async function deleteFolderHandler(folderId: string) {
+        const res = await axios.delete(`${BASE_URL}/delete-folder?folderId=${folderId}`)
+        if (res.status == 200) {
+            alert("Folder deleted successfully")
+            setFolders(folders.filter((f) => f._id !== folderId))
+        }
+
+    }
+
+    async function deleteContentHandler(id: string) {
+        const res = await axios.delete(`${BASE_URL}/delete-content?id=${id}`)
+        if (res.status == 200) {
+            alert("Content deleted successfully")
+            setContents(contents.filter((c) => c._id !== id))
+        }
+    }
+
     return <div >
-
-
 
         {screenWidth < 768 ? <div className='bg-blue2 min-h-screen'>
             <HeaderMobile contentDialogBox={contentDialogBox} setContentDialogBox={setContentDialogBox} logoClickHandler={logoClickHandler}></HeaderMobile>
@@ -77,13 +101,17 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
 
 
                 <div className="pt-[126px] relative mt-[10px] text-[20px] text-white font-semibold mb-[10px]">{folder ? folder : "All Notes"}</div>
-                <Folders folders={folders} setFolder={setFolder}></Folders>
+                <Folders deleteFolderHandler={deleteFolderHandler} folders={folders} setFolder={setFolder}></Folders>
                 <div className="flex flex-col items-center">
+
+
+
                     {contents.map((content) => (
-                        <ContentCardMobile key={content._id} name={content.title} tags={content.tags || []} type={content.contentType} description={content.description || ""} folder={content.folder || ""} ></ContentCardMobile>
+                        <ContentCardMobile deleteContentHandler={deleteContentHandler} key={content._id} name={content.title} tags={content.tags || []} type={content.contentType} description={content.description || ""} folder={content.folder || ""} id={content._id} ></ContentCardMobile>
                     ))}
                 </div>
             </div></div>
+
 
             :
 
@@ -97,16 +125,18 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                         <div className="mt-[33px] text-[24px] text-white font-semibold mb-[25px]">{folder ? folder : "All Notes"}</div>
                         <div className={`grid grid-cols-3 gap-5 ${!sidebar ? "tablet:grid-cols-3 mid:grid-cols-5 laptop:grid-cols-7" : "tablet:grid-cols-2 tablet:gap-6 mid:grid-cols-4 laptop:grid-cols-5"} tablet:gap-5 mb-[25px]`}>
                             {folders.map((folder) => (
-                                <FolderButtons setFolder={setFolder} key={folder} color="bgrey" icon="folder" text={folder}></FolderButtons>
+                                <FolderButtons deleteFolderHandler={deleteFolderHandler} setFolder={setFolder} key={folder._id} color="bgrey" icon="folder" text={folder.name} id={folder._id}></FolderButtons>
                             ))}
                         </div>
 
+
                         <div className={`grid grid-cols-2 gap-5  ${!sidebar ? "tablet:grid-cols-2 mid:grid-cols-3 laptop:grid-cols-4" : " tablet:grid-cols-1 tablet:gap-6 mid:grid-cols-2 laptop:grid-cols-3"} tablet:gap-8 `}>
                             {contents.map((content) => (
-                                <ContentCardMobile key={content._id} name={content.title} tags={content.tags || []} type={content.contentType} description={content.description || ""} folder={content.folder || ""} ></ContentCardMobile>
+                                <ContentCardMobile deleteContentHandler={deleteContentHandler} key={content._id} name={content.title} tags={content.tags || []} type={content.contentType} description={content.description || ""} folder={content.folder || ""} id={content._id} ></ContentCardMobile>
                             ))}
                         </div>
                     </div>
+
                 </div>
             </div>
         }

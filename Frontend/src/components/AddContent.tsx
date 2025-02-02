@@ -7,12 +7,13 @@ export function AddContent({ setContentDialogBox, contentDialogBox,folder }: { s
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try{
-            await axios.post(`${BASE_URL}/add-content`,contentData)
+            await axios.post(`${BASE_URL}/add-content?folder=${folder}`,contentData)
             clearContentData()
             setContentDialogBox(!contentDialogBox)
         }catch(error){
             alert(error)
         }
+
     }
     const clearContentData = () => {
         setContentData({title:"",type:"",description:"",link:"",tags:"",folder:folder })
