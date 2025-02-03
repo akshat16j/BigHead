@@ -2,18 +2,29 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../App.tsx";
 
-export function AddContent({ setContentDialogBox, contentDialogBox,folder }: { setContentDialogBox: (value: boolean) => void, contentDialogBox: boolean,folder:string }) {
+interface AddContentProps {
+    setContentDialogBox: (value: boolean) => void;
+    contentDialogBox: boolean;
+    folder: string;
+    refresh: boolean;
+    setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function AddContent({ contentDialogBox, setContentDialogBox, folder, refresh, setRefresh }: AddContentProps) {
     const [contentData, setContentData] = useState({title:"",type:"",description:"",link:"",tags:"",folder:folder })
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try{
-            await axios.post(`${BASE_URL}/add-content?folder=${folder}`,contentData, {
+            const res = await axios.post(`${BASE_URL}/add-content?folder=${folder}`,contentData, {
                 headers: {
                     authorization: `${sessionStorage.getItem('token')}`
                 }
             })
-            clearContentData()
-            setContentDialogBox(!contentDialogBox)
+            if(res.status == 200){
+                clearContentData()
+                setContentDialogBox(!contentDialogBox)
+                setRefresh(!refresh)
+            }
         }catch(error){
             alert(error)
         }

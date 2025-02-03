@@ -102,7 +102,7 @@ export function MainPageButtons({ color, icon, text }: { color: string, icon: st
     <div className="text-[16px] text-white">{text}</div>
   </div>
 }
-export function FolderButtons({ color, icon, text, setFolder, deleteFolderHandler, id }: { color: string, icon: string, text: string, setFolder: Function, deleteFolderHandler: Function, id: string }) {
+export function FolderButtons({ color, icon, text, setCurrentFolder, deleteFolderHandler, id, refresh, setRefresh }: { color: string, icon: string, text: string, setCurrentFolder: Function, deleteFolderHandler: Function, id: string, refresh: boolean, setRefresh: Function }) {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
@@ -119,7 +119,9 @@ export function FolderButtons({ color, icon, text, setFolder, deleteFolderHandle
   }, []);
 
   function folderChangeHandler() {
-    setFolder(id)
+    setCurrentFolder(id)
+    console.log(text)
+    setRefresh(!refresh)
   }
   return <div className={`cursor-pointer flex items-center justify-center rounded-[5px] w-[170px] h-[45px] text-ellipsis overflow-hidden box-border px-[8px] bg-${color}`}>
 
@@ -175,21 +177,23 @@ export function Tag({ tag }: { tag: string }) {
   </div>
 }
 
-export function Folders({ folders, setFolder, deleteFolderHandler }: { folders: Folder[], setFolder: Function, deleteFolderHandler: Function }) {
+export function Folders({ folders, setCurrentFolder, deleteFolderHandler, refresh, setRefresh }: { folders: Folder[], setCurrentFolder: Function, deleteFolderHandler: Function, refresh: boolean, setRefresh: Function }) {
 
 
   return <div className="grid grid-cols-3 gap-4 mb-[30px]">
     {folders.map((folder) => (
-      <FolderCardMobile id={folder._id} key={folder._id} name={folder.name} setFolder={setFolder} deleteFolderHandler={deleteFolderHandler}></FolderCardMobile>
+      <FolderCardMobile refresh={refresh} setRefresh={setRefresh} id={folder._id} key={folder._id} name={folder.name} setCurrentFolder={setCurrentFolder} deleteFolderHandler={deleteFolderHandler}></FolderCardMobile>
     ))}
   </div>
+
 
 }
 
 
 
 
-export function FolderCardMobile({ name, setFolder, deleteFolderHandler, id }: { name: string, setFolder: Function, deleteFolderHandler: Function, id: string }) {
+export function FolderCardMobile({ name, setCurrentFolder, deleteFolderHandler, id, refresh, setRefresh }: { name: string, setCurrentFolder: Function, deleteFolderHandler: Function, id: string, refresh: boolean, setRefresh: Function }) {
+
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
 
@@ -204,10 +208,18 @@ export function FolderCardMobile({ name, setFolder, deleteFolderHandler, id }: {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  function folderChangeHandler() {
+    setCurrentFolder(id)
+    console.log(name)
+    setRefresh(!refresh)
+  }
   return <div  className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
-    <img onClick={() => setFolder(id)} className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
-    <div onClick={() => setFolder(id)} className="text-[10px] text-white">{name}</div>
+
+    <img onClick={folderChangeHandler} className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
+    <div onClick={folderChangeHandler} className="text-[10px] text-white">{name}</div>
     <button
+
+
 
       onClick={() => setShowMenu((prev) => !prev)}
 

@@ -2,12 +2,22 @@ import { useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../App.tsx";
 
-export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDialogBox: (value: boolean) => void, folderDialogBox: boolean }) {
+export function AddFolder({ setFolderDialogBox, folderDialogBox, currentFolder, setRefresh,refresh }: { 
+    setFolderDialogBox: (value: boolean) => void, 
+    folderDialogBox: boolean,
+    currentFolder: { _id: string },
+    setRefresh: (value: boolean) => void,
+    refresh: boolean
+
+}) {
     const [folderName, setFolderName] = useState("")
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
         try{
-            const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`,{},{
+            const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`, {
+                parentFolder: currentFolder._id  // Pass the current folder's ID as parent
+            }, {
                 headers: {
                     authorization: `${sessionStorage.getItem('token')}`
                 }
@@ -15,10 +25,13 @@ export function AddFolder({ setFolderDialogBox, folderDialogBox }: { setFolderDi
             if(res.status == 200){
                 clearFolderName()
                 setFolderDialogBox(!folderDialogBox)
+                setRefresh(!refresh)
             }
         }catch(error){
             alert(error)
         }
+
+
     }
     const clearFolderName = () => {
         setFolderName("")

@@ -47,11 +47,14 @@ const ContentSchema = new mongoose.Schema({
         type: [String],
         default: []
     },
-    folder:{
-        type: String,
-        default: ''
+    folder: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Folder',
+        default: null,
+        required: false
     }
 })
+
 
 const FolderSchema = new mongoose.Schema({
     name: {
@@ -66,7 +69,8 @@ const FolderSchema = new mongoose.Schema({
     parentFolder:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Folder',
-        default: null
+        default: null,
+        required: false
     }
 })
 

@@ -7,7 +7,6 @@ export const ContentSchema = z.object({
     link: z.string().optional().default(''),
     description: z.string().optional().default(''),
     tags: z.array(z.string()).optional().default([]),
-    folder: z.string().optional().default('')
 })
 
 export type ContentSchemaType = z.infer<typeof ContentSchema>
