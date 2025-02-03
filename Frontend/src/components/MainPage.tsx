@@ -1,5 +1,4 @@
 import { useEffect } from "react"
-import { Link } from "react-router-dom"
 import { BASE_URL } from "../App"
 import axios from "axios"
 import { SideBar } from "./SideBar"
@@ -17,6 +16,7 @@ import {
     refreshState,
     Content
 } from '../store/MainPageItems';
+import { useRecoilValue } from "recoil"
 
 
 
@@ -39,13 +39,17 @@ interface FolderResponse {
 
 
 export function MainPage({ screenWidth }: { screenWidth: number }) {
-    const [sidebar, setSideBar] = useRecoilState(sidebarState);
+    const sidebar = useRecoilValue(sidebarState);
     const [contents, setContents] = useRecoilState(contentsState);
     const [folders, setFolders] = useRecoilState(foldersState);
     const [currentFolder, setCurrentFolder] = useRecoilState(currentFolderState);
-    const [contentDialogBox, setContentDialogBox] = useRecoilState(contentDialogBoxState);
-    const [folderDialogBox, setFolderDialogBox] = useRecoilState(folderDialogBoxState);
-    const [refresh, setRefresh] = useRecoilState(refreshState);
+
+
+    const contentDialogBox = useRecoilValue(contentDialogBoxState);
+    const folderDialogBox = useRecoilValue(folderDialogBoxState);
+    const refresh = useRecoilValue(refreshState);
+
+
 
     useEffect(() => {
         async function fetchFolders() {

@@ -1,6 +1,5 @@
 import {PrimaryButtonSmall,PrimaryButtonLarge} from "../ui_components/ui.tsx"
 import { Link } from "react-router-dom"
-import { BASE_URL } from "../App.tsx"
 
 export function LandingPage({screenWidth}:{screenWidth:number}){
     return <>
@@ -98,7 +97,7 @@ export function LandingPage({screenWidth}:{screenWidth:number}){
   function FeaturesCard({title,text,img}:{text:string,title:string,img:string}){
     return <div className='w-[220px] tablet:w-[200px] laptop:w-[358px] h-[180px] tablet:h-[240px] laptop:h-[394px] flex flex-col justify-between items-center text-center bg-blue1 rounded-[15px] box-border p-[10px] mb-[15px] tablet:m-[5px] laptop:m-[30px] tablet:py-[16px] laptop:px-[50px] laptop:py-[37px] '>
       <img src={`../Assets/icons8-${img}-50.png`} className='w-[30px] h-[30px] tablet:w-[60px] tablet:h-[60px] laptop:h-[80px] laptop:w-[80px]'></img>
-      <div className='font-inter font-[16px] text-center text-white font-bold laptop:text-[24px]'>{title}</div>
+      <div className='font-inter text-center text-white font-bold laptop:text-[24px]'>{title}</div>
       <div className='font-[14px] laptop:text-[20px] text-white'>{text}</div>
     </div>
   }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function checkLink(link: string | undefined, type: string): string | undefined {
     if (type === "video" && link) {

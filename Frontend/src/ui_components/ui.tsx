@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom"
 import { MoreVertical } from "lucide-react";
-import { BASE_URL } from "../App";
 import { useRecoilState } from 'recoil';
 import { showMenuState, screenWidthState, activeMenuFolderState } from '../store/uiItems';
 import { refreshState, currentFolderState, contentDialogBoxState, sidebarState, folderDialogBoxState, Folder } from '../store/MainPageItems';
-import axios from 'axios';
 import { useRef, useEffect } from 'react';
 import { InstagramEmbed, MusicEmbed, TweetsEmbed, YoutubeEmbed } from "../components/Embeds";
-import { useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
+
 
 
 export function PrimaryButtonSmall({ text }: { text: string }) {
@@ -113,8 +112,9 @@ export function FolderButtons({ color, icon, text, id, deleteFolderHandler }: {
 }) {
   const [activeMenuFolder, setActiveMenuFolder] = useRecoilState(activeMenuFolderState);
   const [refresh, setRefresh] = useRecoilState(refreshState);
-  const [currentFolder, setCurrentFolder] = useRecoilState(currentFolderState);
+  const setCurrentFolder = useSetRecoilState(currentFolderState);
   const menuRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -210,7 +210,8 @@ export function FolderCardMobile({ id, name, deleteFolderHandler }: {
 }) {
   const [showMenu, setShowMenu] = useRecoilState(showMenuState);
   const [refresh, setRefresh] = useRecoilState(refreshState);
-  const [currentFolder, setCurrentFolder] = useRecoilState(currentFolderState);
+  const setCurrentFolder = useSetRecoilState(currentFolderState);
+
 
   function folderChangeHandler() {
     setCurrentFolder({ _id: id, name: name, userId: "", parentFolder: "" });
@@ -248,6 +249,7 @@ export function ContentCardMobile({ name, tags, type, description, folder, id, d
 }) {
   console.log('Content type:', type);
   console.log('Links:', links);
+  console.log('Folder:', folder);
 
   let icon = ""
   if (type == "video") {
