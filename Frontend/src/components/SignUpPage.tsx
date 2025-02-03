@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRecoilState } from "recoil";
 import { Header } from "./LandingPage";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../App.tsx"
+import { usernameState, passwordState, errorMessageState, successMessageState } from "../store/AuthItems";
 
 interface SignUpResponse {
     message: string;
@@ -10,10 +11,10 @@ interface SignUpResponse {
 
 export function SignUpPage(){
     const navigate = useNavigate();
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-    const [msg, setMsg] = useState('')
-    const [error, setError] = useState('')
+    const [username, setUsername] = useRecoilState(usernameState);
+    const [password, setPassword] = useRecoilState(passwordState);
+    const [error, setError] = useRecoilState(errorMessageState);
+    const [msg, setMsg] = useRecoilState(successMessageState);
     async function handleSignUp(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault()
         try {

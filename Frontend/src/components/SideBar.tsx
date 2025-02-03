@@ -1,16 +1,20 @@
+import { useRecoilState } from 'recoil';
 import { Link } from "react-router-dom"
 import {MainPageButtons} from "../ui_components/ui"
-
-interface SideBarProps {
-    sidebar: boolean;
-    toggleSidebar: () => void;
-    logoClickHandler: () => void;
-    setFolderDialogBox: (value: boolean) => void;
-}
+import { sidebarState, folderDialogBoxState, currentFolderState } from '../store/MainPageItems';
 
 
 
-export function SideBar({ sidebar, toggleSidebar, logoClickHandler,setFolderDialogBox }: SideBarProps) {
+export function SideBar() {
+    const [sidebar, setSidebar] = useRecoilState(sidebarState);
+    const [, setFolderDialogBox] = useRecoilState(folderDialogBoxState);
+    const [, setCurrentFolder] = useRecoilState(currentFolderState);
+
+    const toggleSidebar = () => setSidebar(!sidebar);
+    const handleLogoClick = () => {
+        setCurrentFolder({ _id: "", name: "All Notes", userId: "", parentFolder: "" });
+      };
+
     return <>
         {!sidebar ? <div>
             <div className="flex flex-col items-center fixed w-[15%] mid:w-[10%] h-screen bg-blue2">
@@ -42,10 +46,11 @@ export function SideBar({ sidebar, toggleSidebar, logoClickHandler,setFolderDial
                     <div className="flex justify-center items-center mt-[45px]">
                         <img onClick={toggleSidebar} className="cursor-pointer w-[25px] h-[25px] mr-4" src="../../Assets/icons8-menu-50.png" alt="menu" />
                         <Link to={"/dashboard"}>
-                            <div onClick={logoClickHandler} className="cursor-pointer flex items-center">
+                            <div onClick={handleLogoClick} className="cursor-pointer flex items-center">
                                 <img className="w-[35px] h-[35px] mr-[7px]" src="../../Assets/icons8-brain-64.png" alt="logo" />
                                 <div className="text-[24px] tracking-tightest font-medium text-white">BigHead</div>
                             </div>
+
                         </Link>
                     </div>
                     <div onClick={() => setFolderDialogBox(true)} className="mt-[40px] mb-[33px]">

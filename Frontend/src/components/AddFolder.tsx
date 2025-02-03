@@ -1,42 +1,40 @@
-import { useState } from "react";
+import { useRecoilState } from "recoil";
 import axios from "axios";
 import { BASE_URL } from "../App.tsx";
+import { folderDialogBoxState, refreshState, currentFolderState } from "../store/MainPageItems";
+import { folderNameState } from "../store/FolderItems";
 
-export function AddFolder({ setFolderDialogBox, folderDialogBox, currentFolder, setRefresh,refresh }: { 
-    setFolderDialogBox: (value: boolean) => void, 
-    folderDialogBox: boolean,
-    currentFolder: { _id: string },
-    setRefresh: (value: boolean) => void,
-    refresh: boolean
+export function AddFolder() {
+    const [folderDialogBox, setFolderDialogBox] = useRecoilState(folderDialogBoxState);
+    const [refresh, setRefresh] = useRecoilState(refreshState);
+    const [currentFolder] = useRecoilState(currentFolderState);
+    const [folderName, setFolderName] = useRecoilState(folderNameState);
 
-}) {
-    const [folderName, setFolderName] = useState("")
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault();
-        try{
+        try {
             const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`, {
-                parentFolder: currentFolder._id  // Pass the current folder's ID as parent
+                parentFolder: currentFolder._id
             }, {
                 headers: {
                     authorization: `${sessionStorage.getItem('token')}`
                 }
             });
-            if(res.status == 200){
-                clearFolderName()
-                setFolderDialogBox(!folderDialogBox)
-                setRefresh(!refresh)
+            if (res.status == 200) {
+                clearFolderName();
+                setFolderDialogBox(!folderDialogBox);
+                setRefresh(!refresh);
             }
-        }catch(error){
-            alert(error)
+        } catch (error) {
+            alert(error);
         }
+    };
 
-
-    }
     const clearFolderName = () => {
-        setFolderName("")
-        setFolderDialogBox(!folderDialogBox)
-    }
+        setFolderName("");
+        setFolderDialogBox(!folderDialogBox);
+    };
+
     return <>
         <div>
             <form onSubmit={handleSubmit} className="relative z-20">

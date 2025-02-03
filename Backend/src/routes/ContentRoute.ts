@@ -12,21 +12,30 @@ import { FolderSchema } from '../schemas/FolderSchema'
 const ContentRouter = Router()
 
 ContentRouter.post('/add-content', authMiddleware, async(req: Request, res: Response) => {
-    try{
-        const {success, data, error} = ContentSchema.safeParse(req.body)
-        if(!success){
-
-            res.status(400).json({errors: error.errors})
-            return
-        }else{
-            const content = await ContentModel.create({...data, userId: req.body.userId,folder: req.query.folder})
-            res.status(200).json({message: 'Content created successfully', content})
+    try {
+        const {success, data, error} = ContentSchema.safeParse(req.body);
+        if(!success) {
+            res.status(400).json({errors: error.errors});
+            return;
         }
+        
+        // Add console.log to debug
+        console.log('Request body:', req.body);
+        console.log('Query folder:', req.query.folder);
+        
+        const content = await ContentModel.create({
+            ...data, 
+            userId: req.body.userId,
+            folder: req.query.folder || null  // Make sure folder is optional
+        });
+        
+        res.status(200).json({message: 'Content created successfully', content});
     }
-    catch(error){
-        res.status(500).json({message: 'Internal server error'})
+    catch(error) {
+        console.error('Server error:', error);  // Add detailed error logging
+        res.status(500).json({message: 'Internal server error', error: error instanceof Error ? error.message : 'Unknown error'});
     }
-})
+});
 
 ContentRouter.get('/content', authMiddleware, async(req: Request, res: Response) => {
     try{

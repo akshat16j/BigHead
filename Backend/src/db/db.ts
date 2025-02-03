@@ -52,6 +52,10 @@ const ContentSchema = new mongoose.Schema({
         ref: 'Folder',
         default: null,
         required: false
+    },
+    links: {
+        type: String,
+        default: ''
     }
 })
 
