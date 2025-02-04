@@ -173,9 +173,11 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                                 folder={content.folder || ""} 
                                 id={content._id}
                                 links={content.links}
+                                createdAt={content.createdAt}
                             />
                         ))}
                     </div>
+
                 </div></div>
             :
             <div className="bg-blue2 min-h-screen w-full overflow-y-auto">
@@ -223,9 +225,11 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
                                     folder={content.folder || ""} 
                                     id={content._id}
                                     links={content.links}
+                                    createdAt={content.createdAt}
                                 />
                             ))}
                         </div>
+
                     </div>
                 </div>
             </div>

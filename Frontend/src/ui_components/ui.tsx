@@ -237,7 +237,7 @@ export function FolderCardMobile({ id, name, deleteFolderHandler }: {
   </div>
 }
 
-export function ContentCardMobile({ name, tags, type, description, folder, id, deleteContentHandler, links }: {
+export function ContentCardMobile({ name, tags, type, description, folder, id, deleteContentHandler, links , createdAt}: {
   name: string,
   tags: string[],
   type: string,
@@ -246,6 +246,8 @@ export function ContentCardMobile({ name, tags, type, description, folder, id, d
   id: string,
   deleteContentHandler: Function,
   links?: string,
+  createdAt: string
+
 }) {
   console.log('Content type:', type);
   console.log('Links:', links);
@@ -314,7 +316,7 @@ export function ContentCardMobile({ name, tags, type, description, folder, id, d
       </div>
 
       <div className="text-[9px] text-grey">
-        15-11-2024
+        {createdAt.split("T")[0]}
       </div>
     </div>
   </div>

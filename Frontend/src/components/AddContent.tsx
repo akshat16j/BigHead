@@ -38,13 +38,15 @@ export function AddContent({ folder }: AddContentProps) {
 
         const link = checkLink(submitData.links, submitData.contentType);
         if (link == "1") {
-            alert("Invalid Link!");
+            alert(`Invalid ${submitData.contentType} Link!`);
             clearContentData();
             setContentDialogBox(!contentDialogBox);
             return;
         } else {
             submitData.links = link;
         }
+
+
 
         console.log('Submitting:', submitData);
 
