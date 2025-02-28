@@ -1,10 +1,6 @@
-import { Router, Request, Response, NextFunction } from 'express'
-import { z } from 'zod'
-import { AuthSchema } from '../schemas/UserSchema'
-import { UserModel } from '../db/db'
+import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { JWT_SECRET } from '../config/config'
-import bcrypt from 'bcrypt'
 
 interface JwtPayload {
     userId: string;

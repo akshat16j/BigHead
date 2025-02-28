@@ -1,5 +1,4 @@
 import { Router, Request, Response } from 'express'
-import { z } from 'zod'
 import { AuthSchema } from '../schemas/UserSchema'
 import { UserModel } from '../db/db'
 import jwt from 'jsonwebtoken'

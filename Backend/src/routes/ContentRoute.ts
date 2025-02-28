@@ -1,10 +1,5 @@
 import { Router, Request, Response } from 'express'
-import { z } from 'zod'
-import { AuthSchema} from '../schemas/UserSchema'
 import { ContentModel, FolderModel, UserModel } from '../db/db'
-import jwt from 'jsonwebtoken'
-import { JWT_SECRET } from '../config/config'
-import bcrypt from 'bcrypt'
 import authMiddleware from '../middlewares/authMiddleware'
 import { ContentSchema } from '../schemas/ContentSchema'
 import { FolderSchema } from '../schemas/FolderSchema'
@@ -18,22 +13,16 @@ ContentRouter.post('/add-content', authMiddleware, async(req: Request, res: Resp
             res.status(400).json({errors: error.errors});
             return;
         }
-        
-        // Add console.log to debug
-        console.log('Request body:', req.body);
-        console.log('Query folder:', req.query.folder);
-        
         const content = await ContentModel.create({
             ...data, 
             userId: req.body.userId,
-            folder: req.query.folder || null  // Make sure folder is optional
+            folder: req.query.folder || null
         });
-        
         res.status(200).json({message: 'Content created successfully', content});
     }
     catch(error) {
-        console.error('Server error:', error);  // Add detailed error logging
-        res.status(500).json({message: 'Internal server error', error: error instanceof Error ? error.message : 'Unknown error'});
+        console.error('Server error:', error);
+        res.status(500).json({message: 'Internal server error', error: error});
     }
 });
 
@@ -46,7 +35,7 @@ ContentRouter.get('/content', authMiddleware, async(req: Request, res: Response)
         })
         res.status(200).json({content})
     }catch(err){
-        res.status(500).json({message: 'Internal server error',error: err instanceof Error ? err.message : 'Unknown error'})
+        res.status(500).json({message: 'Internal server error',error: err})
     }
 })
 
@@ -74,7 +63,7 @@ ContentRouter.post('/add-folder', authMiddleware, async(req: Request, res: Respo
         console.error('Error creating folder:', err)
         res.status(500).json({
             message: 'Internal server error',
-            error: err instanceof Error ? err.message : 'Unknown error'
+            error: err
         })
     }
 })
@@ -87,7 +76,7 @@ ContentRouter.get('/folders', authMiddleware, async(req: Request, res: Response)
         })
         res.status(200).json({folders})
     }catch(err){
-        res.status(500).json({message: 'Internal server error',error: err instanceof Error ? err.message : 'Unknown error'})
+        res.status(500).json({message: 'Internal server error',error: err})
     }
 })
 

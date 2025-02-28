@@ -7,12 +7,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainPage } from './components/MainPage.tsx';
 import { ProtectedRoutes } from './components/ProtectedRoute.tsx';
 import { RecoilRoot } from 'recoil';
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-export const BASE_URL = process.env.BACKEND_URL;
-
+export const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000/api";
 
 function App() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);

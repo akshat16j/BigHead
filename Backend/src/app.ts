@@ -1,6 +1,6 @@
 import express from 'express'
 import UserRouter from './routes/UserRoutes'
-import { MONGO_URI, PORT, JWT_SECRET } from './config/config'
+import { MONGO_URI, PORT} from './config/config'
 import mongoose from 'mongoose'
 import ContentRouter from './routes/ContentRoute'
 import cors from 'cors'
@@ -11,7 +11,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-  origin: ['http://localhost:5173', process.env.FRONTEND_URL || '']
+  origin: ['http://localhost:5173', process.env.MONGO_URI || ""]
 }))
 
 
