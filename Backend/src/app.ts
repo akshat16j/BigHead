@@ -14,7 +14,9 @@ app.use(cors({
   origin: process.env.FRONTEND_URL
 }))
 
-
+app.get("/", (req, res) => {
+  res.send("Backend is working!");
+});
 
 app.use('/api', UserRouter)
 app.use('/api', ContentRouter)
