@@ -37,10 +37,10 @@ export function HeaderMobile() {
         </div>
       </Link>
       <div className="flex justify-between w-[157px] items-center">
-        <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
-        <img className="w-[23px] h-[23px]" src="../../Assets/icons8-search-50.png" alt="search" />
-        <img onClick={() => setContentDialogBox(!contentDialogBox)} className="w-[30px] h-[30px]" src="../../Assets/icons8-plus-50.png" alt="add" />
-        <img className="invert w-[23px] h-[23px]" src="../../Assets/logout.svg" alt="logout" />
+        <img className="invert w-[20px] h-[20px]" src="/Assets/share.svg" alt="share" />
+        <img className="w-[23px] h-[23px]" src="/Assets/icons8-search-50.png" alt="search" />
+        <img onClick={() => setContentDialogBox(!contentDialogBox)} className="w-[30px] h-[30px]" src="/Assets/icons8-plus-50.png" alt="add" />
+        <img className="invert w-[23px] h-[23px]" src="/Assets/logout.svg" alt="logout" />
       </div>
     </div>
   );
@@ -61,18 +61,18 @@ export function HeaderMain() {
     {!sidebar ? <div className="flex justify-between items-center w-full ">
       <Link to="/dashboard">
         <div onClick={handleLogoClick} className="cursor-pointer flex items-center">
-          <img className="w-[35px] h-[35px] mr-[7px]" src="../../Assets/icons8-brain-64.png" alt="logo" />
+          <img className="w-[35px] h-[35px] mr-[7px]" src="/Assets/icons8-brain-64.png" alt="logo" />
           <div className="text-[24px] tracking-tightest font-medium text-white">BigHead</div>
         </div>
       </Link>
       <div className="flex items-center justify-end flex-1 ml-8">
         <div className="flex justify-center items-center box-border w-[230px] mr-[10px] ml-[10px] h-[45px] bg-bgrey rounded-[5px]">
-          <img className="w-[22px] h-[22px] opacity-30 mr-[10px] ml-[10px]" src="../../Assets/icons8-search-50.png" alt="search" />
+          <img className="w-[22px] h-[22px] opacity-30 mr-[10px] ml-[10px]" src="/Assets/icons8-search-50.png" alt="search" />
           <input className="box-border w-full h-[45px] bg-transparent text-white px-2 overflow-hidden text-ellipsis" type="text" placeholder="Search" />
         </div>
         {screenWidth >= 1028 ? <div className="mr-[10px]"><MainPageButtons color="bgrey" icon="share" text="Share Head"></MainPageButtons></div> :
           <div className=" flex justify-center items-center w-[63px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
-            <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
+            <img className="invert w-[20px] h-[20px]" src="/Assets/share.svg" alt="share" />
           </div>
         }
         <div onClick={() => setContentDialogBox(!contentDialogBox)}><MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons></div>
@@ -80,12 +80,12 @@ export function HeaderMain() {
     </div> : <div className="flex justify-end items-center sticky top-0 z-20 bg-blue2">
       <div className="flex items-center justify-end flex-1 ml-8">
         <div className="flex justify-center items-center box-border w-[230px] mr-[10px] ml-[10px] h-[45px] bg-bgrey rounded-[5px]">
-          <img className="w-[22px] h-[22px] opacity-30 mr-[10px] ml-[10px]" src="../../Assets/icons8-search-50.png" alt="search" />
+          <img className="w-[22px] h-[22px] opacity-30 mr-[10px] ml-[10px]" src="/Assets/icons8-search-50.png" alt="search" />
           <input className="box-border w-full h-[45px] bg-transparent text-white" type="text" placeholder="Search" />
         </div>
         {screenWidth >= 1028 ? <div className="mr-[10px]"><MainPageButtons color="bgrey" icon="share" text="Share Head"></MainPageButtons></div> :
           <div className=" flex justify-center items-center w-[63px] mr-[10px] h-[45px] bg-bgrey rounded-[5px] ">
-            <img className="invert w-[20px] h-[20px]" src="../../Assets/share.svg" alt="share" />
+            <img className="invert w-[20px] h-[20px]" src="/Assets/share.svg" alt="share" />
           </div>
         }
         <div onClick={() => setContentDialogBox(!contentDialogBox)}><MainPageButtons color="btn-color" icon="plus" text="Add Content"></MainPageButtons></div>
@@ -97,9 +97,9 @@ export function HeaderMain() {
 
 export function MainPageButtons({ color, icon, text }: { color: string, icon: string, text: string }) {
   return <div className={`cursor-pointer flex items-center justify-center rounded-[5px] w-[170px] h-[45px] text-ellipsis overflow-hidden box-border px-[8px] bg-${color}`}>
-    {icon == "share" ? <img className="invert h-[22px] w-[22px] mr-[9px]" src="../../Assets/share.svg" /> :
+    {icon == "share" ? <img className="invert h-[22px] w-[22px] mr-[9px]" src="/Assets/share.svg" /> :
 
-      <img className={`h-[20px] w-[20px] mr-[9px]`} src={`../../Assets/icons8-${icon}-50.png`} />}
+      <img className={`h-[20px] w-[20px] mr-[9px]`} src={`/Assets/icons8-${icon}-50.png`} />}
     <div className="text-[16px] text-white">{text}</div>
   </div>
 }
@@ -134,7 +134,7 @@ export function FolderButtons({ color, icon, text, id, deleteFolderHandler }: {
 
   return (
     <div className={`cursor-pointer flex items-center justify-center rounded-[5px] w-[170px] h-[45px] text-ellipsis overflow-hidden box-border px-[8px] bg-${color}`}>
-      <img onClick={folderChangeHandler} className={`h-[20px] w-[20px] mr-[9px]`} src={`../../Assets/icons8-${icon}-50.png`} />
+      <img onClick={folderChangeHandler} className={`h-[20px] w-[20px] mr-[9px]`} src={`/Assets/icons8-${icon}-50.png`} />
       <div onClick={folderChangeHandler} className="text-[16px] text-white">{text}</div>
       <button
         onClick={() => setActiveMenuFolder(activeMenuFolder === id ? '' : id)}
@@ -162,9 +162,9 @@ export function ScrollTags() {
     <div className="mt-[60px] z-20 bg-blue3 h-[45px] fixed flex box-border left-0 right-0 pl-[16px] py-[7px] overflow-x-auto no-scrollbar">
       <div className="bg-btn-color rounded-[5px] px-[11px] py-[7px] text-[12px] flex mr-[6px] box-border">
         <div onClick={() => setFolderDialogBox(true)} className="flex w-[35px] items-center">
-          <img className="w-[20px] h-[20px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="new folder" />
+          <img className="w-[20px] h-[20px] mr-[5px]" src="/Assets/icons8-folder-50.png" alt="new folder" />
 
-          <img className="w-[15px] h-[15px]" src="../../Assets/icons8-plus-50.png" />
+          <img className="w-[15px] h-[15px]" src="/Assets/icons8-plus-50.png" />
         </div>
       </div>
       <Tag tag="Videos"></Tag>
@@ -219,7 +219,7 @@ export function FolderCardMobile({ id, name, deleteFolderHandler }: {
   }
 
   return <div className="flex justify-center py-[10px] items-center bg-bgrey rounded-[5px]">
-    <img onClick={folderChangeHandler} className="h-[15px] w-[15px] mr-[5px]" src="../../Assets/icons8-folder-50.png" alt="folder" />
+    <img onClick={folderChangeHandler} className="h-[15px] w-[15px] mr-[5px]" src="/Assets/icons8-folder-50.png" alt="folder" />
     <div onClick={folderChangeHandler} className="text-[10px] text-white">{name}</div>
     <button
       onClick={() => setShowMenu(!showMenu)}
@@ -279,14 +279,14 @@ export function ContentCardMobile({ name, tags, type, description, folder, id, d
 
       <div className="flex items-center">
 
-        <img className={`${type == "insta" || type == "tweets" ? "invert w-[18px] h-[18px]" : "w-[20px] h-[20px]"} mr-[9px]`} src={`../../Assets/${icon}`} />
+        <img className={`${type == "insta" || type == "tweets" ? "invert w-[18px] h-[18px]" : "w-[20px] h-[20px]"} mr-[9px]`} src={`/Assets/${icon}`} />
         <div className="text-[12px] text-white font-semibold text-ellipsis h-[21px] overflow-hidden w-[200px]" >{name}</div>
 
       </div>
       <div className="flex items-center">
 
-        <img className="invert w-[15px] h-[15px] mr-[16px]" src="../../Assets/share.svg" />
-        <img onClick={() => deleteContentHandler(id)} className="cursor-pointer w-[15px] h-[15px]" src="../../Assets/icons8-delete-50.png" />
+        <img className="invert w-[15px] h-[15px] mr-[16px]" src="/Assets/share.svg" />
+        <img onClick={() => deleteContentHandler(id)} className="cursor-pointer w-[15px] h-[15px]" src="/Assets/icons8-delete-50.png" />
       </div>
     </div>
 
