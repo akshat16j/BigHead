@@ -5,11 +5,10 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "tsc -b && node dist/server.js",
-    "build": "tsc",
-    "start": "node dist/server.js"
+    "build": "tsc"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
