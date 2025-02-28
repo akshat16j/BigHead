@@ -7,9 +7,9 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc -b && node dist/app.js",
+    "dev": "tsc -b && node dist/server.js",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
