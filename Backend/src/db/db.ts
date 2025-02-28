@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { Link } from 'react-router-dom'
 import { MONGO_URI } from '../config/config'
 
 mongoose.connect(MONGO_URI)
