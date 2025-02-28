@@ -21,6 +21,4 @@ app.get("/", (req, res) => {
 app.use('/api', UserRouter)
 app.use('/api', ContentRouter)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+export default app
