@@ -9,8 +9,7 @@
   "scripts": {
     "dev": "tsc -b && node dist/app.js",
     "start": "node dist/app.js",
-    "build":"tsc -b"
-    
+    "build": "npx tsc"
   },
   "dependencies": {
     "@types/cors": "^2.8.17",
@@ -23,5 +22,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
   }
 }
