@@ -11,7 +11,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-  origin: ['http://localhost:5173', process.env.MONGO_URI || ""]
+  origin: process.env.FRONTEND_URL
 }))
 
 
