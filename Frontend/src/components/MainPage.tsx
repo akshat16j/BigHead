@@ -56,7 +56,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
             try {
                 const parentFolderQuery = currentFolder._id ? `?parentFolder=${currentFolder._id}` : '';
                 const resFolders = await axios.get<FolderResponse>(
-                    `${BASE_URL}/folders${parentFolderQuery}`,
+                    `${BASE_URL}/api/folders${parentFolderQuery}`,
                     {
                         headers: {
                             authorization: `${sessionStorage.getItem('token')}`
@@ -77,7 +77,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
             try {
                 const folderQuery = currentFolder._id ? `?folder=${currentFolder._id}` : '';
                 const resContent = await axios.get<ContentResponse>(
-                    `${BASE_URL}/content${folderQuery}`,
+                    `${BASE_URL}/api/content${folderQuery}`,
                     {
                         headers: {
                             authorization: `${sessionStorage.getItem('token')}`
@@ -96,7 +96,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
         if (currentFolder.parentFolder) {
             try {
                 const res = await axios.get<FolderResponse>(
-                    `${BASE_URL}/folders/${currentFolder.parentFolder}`,
+                    `${BASE_URL}/api/folders/${currentFolder.parentFolder}`,
                     {
                         headers: {
                             authorization: `${sessionStorage.getItem('token')}`
@@ -117,7 +117,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
     };
 
     async function deleteFolderHandler(folderId: string) {
-        const res = await axios.delete(`${BASE_URL}/delete-folder?folderId=${folderId}`,{
+        const res = await axios.delete(`${BASE_URL}/api/delete-folder?folderId=${folderId}`,{
             headers: {
                 authorization: `${sessionStorage.getItem('token')}`
             }
@@ -129,7 +129,7 @@ export function MainPage({ screenWidth }: { screenWidth: number }) {
     }
 
     async function deleteContentHandler(id: string) {
-        const res = await axios.delete(`${BASE_URL}/delete-content?id=${id}`,{
+        const res = await axios.delete(`${BASE_URL}/api/delete-content?id=${id}`,{
             headers: {
                 authorization: `${sessionStorage.getItem('token')}`
             }

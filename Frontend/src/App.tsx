@@ -8,7 +8,7 @@ import { MainPage } from './components/MainPage.tsx';
 import { ProtectedRoutes } from './components/ProtectedRoute.tsx';
 import { RecoilRoot } from 'recoil';
 
-export const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000/api";
+export const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);

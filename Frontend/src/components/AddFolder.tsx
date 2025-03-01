@@ -13,7 +13,7 @@ export function AddFolder() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${BASE_URL}/add-folder?folder=${folderName}`, {
+            const res = await axios.post(`${BASE_URL}/api/add-folder?folder=${folderName}`, {
                 parentFolder: currentFolder._id
             }, {
                 headers: {

@@ -18,7 +18,7 @@ export function SignUpPage(){
     async function handleSignUp(e:React.FormEvent<HTMLFormElement>){
         e.preventDefault()
         try {
-            const res = await axios.post<SignUpResponse>(`${BASE_URL}/register`, {username, password})
+            const res = await axios.post<SignUpResponse>(`${BASE_URL}/api/register`, {username, password})
             if(res.status === 200){
                 console.log(res.data.message)
                 setMsg("Account created successfully")

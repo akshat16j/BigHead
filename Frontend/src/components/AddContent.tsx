@@ -52,7 +52,7 @@ export function AddContent({ folder }: AddContentProps) {
 
         try {
             const res = await axios.post(
-                `${BASE_URL}/add-content${folder ? `?folder=${folder}` : ''}`,  // Only add folder query if it exists
+                `${BASE_URL}/api/add-content${folder ? `?folder=${folder}` : ''}`,  // Only add folder query if it exists
                 submitData,
                 {
                     headers: {
