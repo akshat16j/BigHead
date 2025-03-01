@@ -43,7 +43,7 @@ export function SignUpPage(){
         <div className="flex flex-col justify-center items-center">
             <div className="box-border mt-[80px] tablet:mt-[50px] p-[3px] w-[283px] tablet:w-[413px] h-[356px] tablet:h-[511px] bg-text-gradient rounded-[15px]">
                 <form onSubmit={handleSignUp}  className=" flex flex-col justify-between items-center rounded-[12px] h-full bg-blue3 px-[30px] py-[30px]">
-                    <div className=" font-inter text-white text-[24px] tablet:text-[40px] font-bold mb-[10px]">Create Account</div>
+                    <div className=" font-inter text-white text-[24px] tablet:text-[40px] font-bold mb-[10px] cursor-pointer">Create Account</div>
                     <input onChange={handleUsernameChange} onInput={handleUsernameChange} className=" text-white box-border w-full bg-blue1 py-[6px] tablet:py-[11px] px-[15px] rounded-[12px]" type="text" placeholder="username" />
                     <input onChange={handlePasswordChange} onInput={handlePasswordChange} className=" text-white box-border w-full bg-blue1 py-[6px] tablet:py-[11px] px-[15px] rounded-[12px]" type="text" placeholder="password" />
                     <input type="submit" className="bg-btn-color text-[18px] tablet:text-[24px] w-full  text-white rounded-[12px] px-6 tablet:py-[11px] py-2" value="Create Account"/>
